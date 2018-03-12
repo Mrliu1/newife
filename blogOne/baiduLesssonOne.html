@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+
+  <label>请输入北京今天空气质量：<input id="aqi-input" class="add" type="text" value="aa" /></label>
+  <button id="button">确认填写</button>
+
+  <div>您输入的值是：<span id="aqi-display">尚无录入</span></div>
+
+<script type="text/javascript">
+
+(function() {
+  /*    
+  在注释下方写下代码
+  给按钮button绑定一个点击事件
+  在事件处理函数中
+  获取aqi-input输入的值，并显示在aqi-display中
+  */
+  var _event = document.getElementById('button');
+  // var _input =document.getElementById('aqi-input');
+  var _input=document.querySelector('#aqi-input');
+  //querySelector选择器js原生的有类似于和jQuery的$一样强大的选择绑定选择器的功能。document.querySelector("p")//取第一个P标签dom,document.querySelector(".app")//取第一个class为app的dom
+  console.log(_input);
+  _event.addEventListener('click',function(){
+    debugger
+    console.log(_input);
+    //_input.getAttribute('value')//得到的值都是aa他是dom属性值，属性值不可变，HTML值
+    //次一点的实现 innerHTML是符合W3C标准的属性，而innerText只适用于IE浏览器（现在也适应chrome浏览器）
+    // document.getElementById('aqi-display').innerText=_input.value;
+    document.getElementById('aqi-display').innerHTML=_input.value;
+  })
+
+})();
+
+</script>
+</body>
+</html>
