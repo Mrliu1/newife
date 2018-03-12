@@ -15,4 +15,5 @@ innerHTML是符合W3C标准的属性，而innerText只适用于IE浏览器（现
 6、可以使用innerHTML取得包含HTML标签的内容后，再用正则表达式去除HTML标签
 正则去标签方法  var content = document.getElementById("p1");  
             alert(content.innerHTML.replace(/& lt;.+?>/gim,'')); 
+7、使用outerHTML和outerText 与innerHTML 、innerText一一对应，outerHTML 是element DOM接口的 outerHTML属性, 获取描述包括其后代的元素的序列化HTML片段。它可以用从给定字符串解析的节点设置为替换元素。使用outerHTML替换掉HTML元素，被替换的元素不显示但是仍然在内存中。
 7.label 和input的妙用， input的id和label的for设置为同样的值可以使点击label里的内容触发input的事件。
