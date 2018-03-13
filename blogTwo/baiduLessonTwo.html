@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+</head>
+
+<body>
+    <h2>污染城市列表</h2>
+    <ul id="showCity">
+        <li>第一名：福州，（样例）10</li>
+        <li>第二名：福州，（样例）10</li>
+    </ul>
+    <script type="text/javascript">
+    var apiData = [
+        ["北京", 90],
+        ["上海", 50],
+        ["福州", 10],
+        ["广州", 50],
+        ["成都", 90],
+        ["西安", 100]
+    ];
+    //这里可以调map处理的
+    appendNode(apiData);
+    // traditionFor(apiData)
+    // ESFor(apiData)
+      function  traditionFor(apiData) {
+         /*
+        在注释下方编写代码
+        遍历读取aqiData中各个城市的数据
+        将空气质量指数大于60的城市显示到aqi - list的列表中 */
+        //传统的for循环
+        var newArr = [];
+        var html = '';
+        //获取ul下之前的子节点并转为字符串形式
+        html=document.getElementById('showCity').outerHTML.replace('<ul id="showCity">','').replace('</ul>','');
+        console.log(html)
+        for (var i = 0, len = apiData.length; i < len; i++) {
+            if(apiData[i][1]>60){
+                newArr.push(apiData[i]);
+                //性能较优这里只是字符串的拼装，并不涉及到dom的渲染
+                html += '<li>'+apiData[i]+'</li>';
+                //性能较差涉及到dom渲染
+               /* var node=document.createElement("li");//创造一个li标签
+                var textNode = document.createTextNode(apiData[i]);
+                node.appendChild(textNode);
+                document.getElementById('showCity').appendChild(node);*/
+            }
+        }
+        console.log(html)
+        document.getElementById('showCity').innerHTML = html;
+        return newArr;//返回实现的新数组
+    }
+  
+    //使用map的方法实现，返回一个新数组,map返回后是可以在进行遍历的
+  /*  eg:var kvArray = [{key: 1, value: 10}, 
+               {key: 2, value: 20}, 
+               {key: 3, value: 30}];
+
+var reformattedArray = kvArray.map(obj =>{ 
+   var rObj = {};
+   rObj[obj.key] = obj.value;
+   return rObj;
+})*/
+// reformattedArray is now [{1: 10}, {2: 20}, {3: 30}], 
+    function appendNode (arr) {
+        var html = '';
+        var newArr = [];
+        var dealArr=arr.map((item,index)=>{
+            if(item[1]>60){
+                 html += '<li>'+item+'</li>';
+                newArr.push(item);
+                return item;
+            }
+        })
+        document.getElementById('showCity').innerHTML = html;
+        console.log(1,dealArr);
+        console.log(2,newArr)
+        return newArr
+    }
+    //forEach方法返回值undefined。实现 forEach()除了抛出异常外，没有办法停止或打破循环。如果您需要这样的行为，该forEach()方法是错误的工具。用一个简单的循环或for ...来  代替。如果您正在为谓词测试数组元素并需要布尔返回值，则可以使用every()or some()替代。如果可用的话，新的方法find()或者findIndex()可以用于提前终止真正的谓词
+    // forEach和map一样是传回调函数[2, 5, , 9].forEach(logArrayElements)，回调函数的参数为（element, index, array），当前元素，index下标，目标数组
+    function ESFor(arr){
+        let newArr=[];
+        let html='';
+        arr.forEach((value)=> {
+            if(value[1]>60) {
+           html += '<li>'+ value +'</li>';
+                newArr.push(value);
+            }
+          })
+          document.getElementById('showCity').innerHTML = html;
+            return newArr
+    }
+    </script>
+</body>
+
+</html>
