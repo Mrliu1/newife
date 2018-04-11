@@ -1,0 +1,47 @@
+﻿任务目的
+在上一任务基础上继续JavaScript的体验
+接触一下JavaScript中的高级选择器
+学习JavaScript中的数组对象遍历、读写、排序等操作
+学习简单的字符串处理操作
+任务描述
+参考以下示例代码，读取页面上已有的source列表，从中提取出城市以及对应的空气质量
+将数据按照某种顺序排序后，在resort列表中按照顺序显示出来
+
+
+实现效果使用到的技术：
+一、
+ // document.getElementsByTagName
+ // document.getElementsByClassName
+ // document.querySelectorAll,这些方法获取到的结果是个集合，并不是数组，而map,forEach这些方法只有在数组原型里面才有，所以可以先将它们转化Array.from
+二、
+  // innerText会忽略标签只取标签里的内容，注意子标签也会被忽略
+三、普通的IE浏览器的判断
+  // event=event?event:window.event; 
+  // event.stopPropagation(); 
+  // Event对象：
+  // 在IE浏览器中，event对象是window对象的一个属性。
+四、冒泡的防止与event.preventDefault() 方法阻止元素发生默认的行为。
+//event.preventDefault() 方法阻止元素发生默认的行为。是jQuery的
+ event.preventDefault();js原生也有这个方法
+ 该Event接口的preventDefault()方法告诉用户代理，如果该事件没有得到明确处理，则不应该像通常那样采用默认操作。事件继续像往常一样传播，除非它的一个事件监听器调用stopPropagation()或者stopImmediatePropagation()其中一个立即终止传播。
+V8浏览器 event.stopPropagation
+preventDefault()在事件流的任何阶段进行调用都会取消事件，这意味着实现通常由事件执行的任何默认操作都不会发生。
+
+从Gecko 6.0开始，调用preventDefault()会导致Event.defaultPrevented()属性的值变为true。
+
+您可以使用Event.cancelable来检查事件是否可以取消。调用preventDefault()不可取消的事件不起作用。cancelable和preventDefault()合用可以取消可取消事件
+该Event.cancelBubble物业是一个历史的别名Event.stopPropagation()。true在从事件处理程序返回之前将其值设置为阻止事件的传播。在稍后的实现中，将其设置为false将不起作用。
+伍、原生实现创建新的dom并加载在目标dom里面
+    let liDom = document.createElement('li')
+    liDom.innerHTML =`第${sortIndex[index]}名：${item[0]}空气质量：<b>${item[1]}</b>`
+    apppendDom.appendChild(liDom)
+这里还用到了es6的模板字符串的一些基本用法
+六、较少重载的操作将整个待插入数据进行字符串处理再统一给通过innerHTML赋给目标dom
+data.forEach((item,index) => {
+     newstring +=`<li>第${sortIndex[index]}名：${item[0]}空气质量：<b>${item[1]}</b></li>`
+  })
+七、sort处理排序问题，还有浅拷贝和深拷贝要区分下。下次专题分析
+let newArr=data.sort((a,b)=>{
+  return a[1]-b[1] //取的是true
+}) //这里是浅拷贝原数组data也会发生改变
+console.log(newArr,111111)
