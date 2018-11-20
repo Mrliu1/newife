@@ -23,14 +23,17 @@
 四、冒泡的防止与event.preventDefault() 方法阻止元素发生默认的行为。
 //event.preventDefault() 方法阻止元素发生默认的行为。是jQuery的
  event.preventDefault();js原生也有这个方法
- 该Event接口的preventDefault()方法告诉用户代理，如果该事件没有得到明确处理，则不应该像通常那样采用默认操作。事件继续像往常一样传播，除非它的一个事件监听器调用stopPropagation()或者stopImmediatePropagation()其中一个立即终止传播。
+ 该Event接口的preventDefault()方法告诉用户代理，如果该事件没有得到明确处理，则不应该像通常那样采用默认操作。
+ 事件继续像往常一样传播，除非它的一个事件监听器调用stopPropagation()或者stopImmediatePropagation()其中一个立即终止传播。
 V8浏览器 event.stopPropagation
 preventDefault()在事件流的任何阶段进行调用都会取消事件，这意味着实现通常由事件执行的任何默认操作都不会发生。
 
 从Gecko 6.0开始，调用preventDefault()会导致Event.defaultPrevented()属性的值变为true。
 
-您可以使用Event.cancelable来检查事件是否可以取消。调用preventDefault()不可取消的事件不起作用。cancelable和preventDefault()合用可以取消可取消事件
-该Event.cancelBubble物业是一个历史的别名Event.stopPropagation()。true在从事件处理程序返回之前将其值设置为阻止事件的传播。在稍后的实现中，将其设置为false将不起作用。
+您可以使用Event.cancelable来检查事件是否可以取消。调用preventDefault()不可取消的事件不起作用。
+cancelable和preventDefault()合用可以取消可取消事件
+该Event.cancelBubble物业是一个历史的别名Event.stopPropagation()。true在从事件处理程序返回之前将其值设置为阻止事件的传播。
+在稍后的实现中，将其设置为false将不起作用。
 伍、原生实现创建新的dom并加载在目标dom里面
     let liDom = document.createElement('li')
     liDom.innerHTML =`第${sortIndex[index]}名：${item[0]}空气质量：<b>${item[1]}</b>`
